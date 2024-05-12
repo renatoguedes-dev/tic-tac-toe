@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+*, *::after, *::before {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+:root {
+    --cell-size: 150px;
+    --mark-size: calc(var(--cell-size) * .9);
+}
+
+html, body {
+    height: 100%;
+    /* background-color: lightgray; */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4rem;
+}
+
+.turn {
+    font-size: 2.5rem;
+    margin-bottom: 6rem;
+}
+
+#board {
+    display: grid;
+    width: 100vw;
+    font-family: 'Fredoka One', cursive;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(3, auto);
+}
+
+.square-div {
+    display: flex;
+    border: 1px solid black;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    height: var(--cell-size);
+    width: var(--cell-size);
+    font-size: 140px;
+    position: relative;
+    cursor: pointer;
+}
+
+.square-div.x,
+.square-div.o {
+    cursor: not-allowed;
+}
+
+.square-div.x::after,
+.square-div.x::before {
+    content: "";
+    position: absolute;
+    width: calc(var(--mark-size) * .15);
+    height: var(--mark-size);
+    background-color: black;
+}
+
+.square-div.x::before {
+    transform: rotate(45deg);
+}
+
+.square-div.x::after {
+    transform: rotate(-45deg);
+}
+
+.square-div.o::after,
+.square-div.o::before {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+}
+
+.square-div.square-div.o::before {
+    width: var(--mark-size);
+    height: var(--mark-size);
+    background-color: black;
+}
+
+.square-div.square-div.o::after {
+    width: calc(var(--mark-size) * .7);
+    height: calc(var(--mark-size) * .7);
+    background-color: white;
+}
+
+.square-div[data-cell="1"],
+.square-div[data-cell="2"],
+.square-div[data-cell="3"] {
+    border-top: none;
+}
+
+.square-div[data-cell="3"],
+.square-div[data-cell="6"],
+.square-div[data-cell="9"] {
+    border-right: none;
+}
+
+.square-div[data-cell="1"],
+.square-div[data-cell="4"],
+.square-div[data-cell="7"] {
+    border-left: none;
+}
+
+.square-div[data-cell="7"],
+.square-div[data-cell="8"],
+.square-div[data-cell="9"] {
+    border-bottom: none;
+}
+
+
+.win-message {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 5rem;
+}
+
+.win-message button {
+    font-size: 3rem;
+    background-color: white;
+    border: 1px solid black;
+    padding: 0.25em 0.5em;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.win-message button:hover {
+    background-color: black;
+    border-color: white;
+    color: white;
+}
+
+.win-message.show {
+    display: flex;
+}
+
+.created-by {
+    background-color: #1F2937;
+    color: #E5E7EB;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    font-size: 20px;
+    font-weight: 400;
+    width: 100%;
+}
+
+
+@media screen and (max-width: 470px) {
+    :root {
+        --cell-size: 70px;
+    }
+
+    .turn {
+        font-size: 1.5rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .win-message {
+        font-size: 2rem;
+    }
+
+    .win-message button {
+        font-size: 1.5rem;
+    }
+}
